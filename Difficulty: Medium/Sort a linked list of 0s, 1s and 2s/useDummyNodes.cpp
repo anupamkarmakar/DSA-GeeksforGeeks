@@ -16,6 +16,8 @@ class Solution {
     //   three dummy linked lists (0-list, 1-list, 2-list) and then merge them
   
     Node* segregate(Node* head) {
+        if(!head || !head->next) return head;
+        
         // Dummy heads for three linked lists: 0s, 1s, 2s
         Node *zeroHead = new Node(-1);
         Node *oneHead = new Node(-1);
