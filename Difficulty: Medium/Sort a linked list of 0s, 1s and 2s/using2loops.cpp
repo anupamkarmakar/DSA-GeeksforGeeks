@@ -13,7 +13,7 @@
 class Solution {
   public:
     Node* segregate(Node* head) {
-        // code here
+        // Two pass solution...
         int count0=0, count1=0, count2=0;
         Node *p=head;
         
