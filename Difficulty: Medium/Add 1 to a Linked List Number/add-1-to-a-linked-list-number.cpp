@@ -14,37 +14,27 @@ struct Node
 */
 
 class Solution {
-public:
-    Node* reverse(Node* head) {
-        Node* prev = NULL;
-        Node* curr = head;
-        while(curr){
-            Node* next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        return prev;
+  public:
+    int addHelper(Node* temp){
+        if(temp==NULL)
+            return 1;
+        
+        int carry=addHelper(temp->next);
+        temp->data+=carry;
+        if(temp->data<10) return 0;
+        temp->data=0;
+        return 1;
+        
     }
-
+    
     Node* addOne(Node* head) {
-        head = reverse(head);
-
-        Node* curr = head;
-        int carry = 1;
-
-        while(curr && carry){
-            int sum = curr->data + carry;
-            curr->data = sum % 10;
-            carry = sum / 10;
-
-            if(!curr->next && carry){ 
-                curr->next = new Node(0); 
-            }
-            curr = curr->next;
+        int carry = addHelper(head);
+        
+        if(carry==1){
+            Node *newNode = new Node(1);
+            newNode->next=head;
+            head=newNode;
         }
-
-        head = reverse(head);
         return head;
     }
 };
