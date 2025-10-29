@@ -16,15 +16,16 @@ class Solution {
   public:
     Node *reverse(Node *head) {
         // code here
-        struct Node *p=head,*q=head;
-        while(p->next){
-            p=p->next;
+        if(!head || !head->next) return head;
+        
+        Node *last=nullptr,*curr=head;
+        while(curr){
+            last = curr->prev;
+            curr->prev=curr->next;
+            curr->next=last;
+            
+            curr = curr->prev;
         }
-        while(q!=p && q->prev!=p){
-            swap(q->data,p->data);
-            q=q->next;
-            p=p->prev;
-        }
-        return head;
+        return last->prev;
     }
 };
