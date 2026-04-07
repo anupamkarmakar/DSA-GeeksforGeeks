@@ -3,11 +3,10 @@ public:
     vector<int> stableMarriage(vector<vector<int>>& men, vector<vector<int>>& women) {
         int n = men.size();
 
-        vector<int> partnerOfWoman(n, -1); // woman → man
-        vector<int> partnerOfMan(n, -1);   // man → woman
-        vector<int> nextProposal(n, 0);    // next woman index to propose
-
-        // Precompute ranking: womenRank[w][m] = rank of man m for woman w
+        vector<int> partnerOfWoman(n, -1);
+        vector<int> partnerOfMan(n, -1); 
+        vector<int> nextProposal(n, 0); 
+        
         vector<vector<int>> womenRank(n, vector<int>(n));
         for (int w = 0; w < n; w++) {
             for (int i = 0; i < n; i++) {
@@ -26,7 +25,6 @@ public:
             nextProposal[m]++;
 
             if (partnerOfWoman[w] == -1) {
-                // Woman is free
                 partnerOfWoman[w] = m;
                 partnerOfMan[m] = w;
             } else {
